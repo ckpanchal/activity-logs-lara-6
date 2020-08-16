@@ -5,11 +5,11 @@
 	<br>
     <div class="row justify-content-center">
     	<div class="col-md-6">
-    		<h2>Tasks List</h2>
+    		<h2>Todos List</h2>
     	</div>
     	<div class="col-md-6">
     		<div class="float-right">
-    			<a href="{{ route('task.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add new task</a>
+    			<a href="{{ route('todo.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add new todo</a>
     		</div>
     	</div>
     	<br>
@@ -34,18 +34,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					@forelse ($tasks as $task)
+					@forelse ($todos as $todo)
 					    <tr>
-							<th>{{ $task->id }}</th>
-							<td>{{ $task->title }}</td>
-							<td><center>{{ $task->status }}</center></td>
+							<th>{{ $todo->id }}</th>
+							<td>{{ $todo->title }}</td>
+							<td><center>{{ $todo->status }}</center></td>
 							<td>
 								<div class="action_btn">
 									<div class="action_btn">
-										<a href="{{ route('task.edit', $task->id)}}" class="btn btn-warning">Edit</a>
+										<a href="{{ route('todo.edit', $todo->id)}}" class="btn btn-warning">Edit</a>
 									</div>
 									<div class="action_btn margin-left-10">
-										<form action="{{ route('task.destroy', $task->id)}}" method="post">
+										<form action="{{ route('todo.destroy', $todo->id)}}" method="post">
 											@csrf
 											@method('DELETE')
 											<button class="btn btn-danger" type="submit">Delete</button>
