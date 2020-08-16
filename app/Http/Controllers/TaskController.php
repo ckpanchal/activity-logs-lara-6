@@ -38,22 +38,21 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = Auth::user();
+        $user = Auth::user();
         $requestData = $request->input();
         $task = Task::create($requestData);
         if ($task) {
-            
             // Add activity logs
-            activity('New Task')
+            activity('Task')
                ->performedOn($task)
-               //->causedBy($user)
-               //->withProperties(['customProperty' => 'customValue'])
+               ->causedBy($user)
+               ->withProperties(['customProperty' => 'customValue'])
                ->log('New task added successfully');
-
-            // return view with success message
-
+            $request->session()->flash('success', 'Todo successfully added');
+        } else {
+            $request->session()->flash('error', 'Oops something went wrong, Todo not saved');
         }
-        // return view with error message  
+        return redirect('task');  
     }
 
     /**
